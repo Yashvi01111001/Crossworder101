@@ -1,6 +1,9 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    padding-left: 10px; /* Add left padding */
+    padding-right: 10px; /* Add right padding */
+    overflow-x: auto; /* Ensures content doesn't get cut off */
 }
 
 #grid {
@@ -8,7 +11,10 @@ body {
     grid-template-columns: repeat(10, 40px);
     gap: 5px;
     justify-content: center;
-    margin: 20px 0;
+    margin: 20px auto;
+    max-width: calc(10 * 40px + 9 * 5px); /* Ensure grid doesn't overflow */
+    padding-left: 10px; /* Add extra padding */
+    padding-right: 10px;
 }
 
 .cell {

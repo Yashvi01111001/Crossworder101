@@ -21,30 +21,10 @@ crossword = [
 
 directions = [(0,1), (1,0), (0,-1), (-1,0), (1,1), (-1,-1), (1,-1), (-1,1)]
 
-def search_word(word):
-    for r in range(10):
-        for c in range(10):
-            if crossword[r][c] == word[0]:
-                for dr, dc in directions:
-                    path = []
-                    nr, nc = r, c
-                    for i in range(len(word)):
-                        if 0 <= nr < 10 and 0 <= nc < 10 and crossword[nr][nc] == word[i]:
-                            path.append((nr, nc))
-                            nr += dr
-                            nc += dc
-                        else:
-                            break
-                    if len(path) == len(word):
-                        return {"word": word, "positions": path}
-    return {"word": word, "positions": []}
-
 # def search_word(word):
-#     print(f"Searching for: {word}")  # Debugging
 #     for r in range(10):
 #         for c in range(10):
-#             if crossword[r][c] == word[0]:  # Found the first letter
-#                 print(f"First letter found at: ({r},{c})")  # Debugging
+#             if crossword[r][c] == word[0]:
 #                 for dr, dc in directions:
 #                     path = []
 #                     nr, nc = r, c
@@ -56,10 +36,30 @@ def search_word(word):
 #                         else:
 #                             break
 #                     if len(path) == len(word):
-#                         print(f"Found {word} at {path}")  # Debugging
 #                         return {"word": word, "positions": path}
-#     print(f"{word} not found!")  # Debugging
 #     return {"word": word, "positions": []}
+
+def search_word(word):
+    print(f"Searching for: {word}")  # Debugging
+    for r in range(10):
+        for c in range(10):
+            if crossword[r][c] == word[0]:  # Found the first letter
+                print(f"First letter found at: ({r},{c})")  # Debugging
+                for dr, dc in directions:
+                    path = []
+                    nr, nc = r, c
+                    for i in range(len(word)):
+                        if 0 <= nr < 10 and 0 <= nc < 10 and crossword[nr][nc] == word[i]:
+                            path.append((nr, nc))
+                            nr += dr
+                            nc += dc
+                        else:
+                            break
+                    if len(path) == len(word):
+                        print(f"Found {word} at {path}")  # Debugging
+                        return {"word": word, "positions": path}
+    print(f"{word} not found!")  # Debugging
+    return {"word": word, "positions": []}
 
 @app.route('/', methods=['GET'])
 def home():
