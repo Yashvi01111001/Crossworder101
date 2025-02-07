@@ -35,7 +35,7 @@ function findWord() {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.word) {
+        if (data.found) {
             document.getElementById("results").innerHTML = 
                 `<p>Found: ${data.word} at positions: ${JSON.stringify(data.positions)}</p>`;
         } else {
