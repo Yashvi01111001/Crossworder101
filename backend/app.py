@@ -69,9 +69,6 @@ def home():
 def find():
     data = request.json
     word = data.get("word")
-    if not word:
-        return jsonify({"error": "No word provided"}), 400  # Bad Request
-
     return jsonify(search_word(word.upper()))
 
 # @app.route("/", methods=["GET"])  # Only handles GET requests

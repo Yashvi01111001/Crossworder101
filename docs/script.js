@@ -27,27 +27,26 @@ function createGrid() {
 
 // AJAX Request to Python Backend
 function findWord() {
-    let word = document.getElementById("wordInput").value.trim(); // Trim whitespace
-    let resultsElement = document.getElementById("results"); 
-
-    fetch("https://crossworder101-backend.onrender.com/find", { 
+    let word = document.getElementById("wordInput").value;
+    fetch("https://crossworder101-backend.onrender.com/find", { // Updated URL
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ word })
     })
     .then(response => response.json())
     .then(data => {
-        console.log("Backend Response:", data); // Debugging
-
-        if (data.found) {  
-            resultsElement.innerHTML = `<p>Found: <strong>${data.word}</strong> at positions: ${JSON.stringify(data.positions)}</p>`;
+        if (data.word) {
+            document.getElementById("results").innerHTML = 
+                `<p>Found: ${data.word} at positions: ${JSON.stringify(data.positions)}</p>`;
         } else {
-            resultsElement.innerHTML = `<p>"<strong>${word}</strong>" is not in this crossword.</p>`;
+            document.getElementById("results").innerHTML = 
+                `<p>Word not found.</p>`;
         }
     })
     .catch(error => {
         console.error("Error:", error);
-        resultsElement.innerHTML = `<p>There was an error processing your request. Please try again later.</p>`;
+        document.getElementById("results").innerHTML = 
+            `<p>There was an error processing your request. Please try again later.</p>`;
     });
 }
 
