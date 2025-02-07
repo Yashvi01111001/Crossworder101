@@ -27,7 +27,8 @@ function createGrid() {
 
 // AJAX Request to Python Backend
 function findWord() {
-    let word = document.getElementById("wordInput").value;
+    let word = document.getElementById("wordInput").value.toUpperCase();
+    console.log("Searching for:", word); // Debugging
     fetch("https://crossworder101-backend.onrender.com/find", { // Updated URL
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,7 +36,7 @@ function findWord() {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.word) {
+        if (data.word && data.positions.length > 0) {
             document.getElementById("results").innerHTML = 
                 `<p>Found: ${data.word} at positions: ${JSON.stringify(data.positions)}</p>`;
         } else {

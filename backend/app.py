@@ -68,7 +68,10 @@ def home():
 def find():
     data = request.json
     word = data.get("word")
-    return jsonify(search_word(word.upper()))
+    print(f"Received word: {word}")  # Debugging
+    result = search_word(word.upper())
+    print(f"Search result: {result}")  # Debugging
+    return jsonify(result)
 
 # @app.route("/", methods=["GET"])  # Only handles GET requests
 # def home():
